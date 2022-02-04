@@ -3,7 +3,10 @@ WebApiGatewaySettings:
     AllowedChatOrigins:
         - https://localhost:44300
         - https://localhost:44398
-Routes: 
+Routes:
+#
+#   ServiceName: Microservices.Demo.Auth.API
+#
     -    
         DownstreamPathTemplate: /api/Users
         DownstreamScheme: http
@@ -15,11 +18,12 @@ Routes:
             TtlSeconds: 15
         AuthenticationOptions:
             AuthenticationProviderKey: ApiSecurityAuthenticationScheme
-#            AllowedScopes:
-#                -
         RouteClaimsRequirement:
             userType: SALESMAN      
         DangerousAcceptAnyServerCertificateValidator: true
+#
+#   ServiceName: Microservices.Demo.Auth.API
+#
     -
         DownstreamPathTemplate: /api/Users
         DownstreamScheme: http
@@ -30,6 +34,9 @@ Routes:
         FileCacheOptions: 
             TtlSeconds: 15        
         DangerousAcceptAnyServerCertificateValidator: true
+#
+#   ServiceName: Microservices.Demo.Product.API
+#
     -    
         DownstreamPathTemplate: /api/Products/{everything}
         DownstreamScheme: http
@@ -41,11 +48,12 @@ Routes:
             TtlSeconds: 15
         AuthenticationOptions:
             AuthenticationProviderKey: ApiSecurityAuthenticationScheme
-#            AllowedScopes:
-#                -
         RouteClaimsRequirement:
             userType: SALESMAN      
         DangerousAcceptAnyServerCertificateValidator: true
+#
+#   ServiceName: Microservices.Demo.Product.API
+#
     -
         DownstreamPathTemplate: /api/Products
         DownstreamScheme: http
@@ -57,11 +65,12 @@ Routes:
             TtlSeconds: 15
         AuthenticationOptions:
             AuthenticationProviderKey: ApiSecurityAuthenticationScheme
- #           AllowedScopes:
- #               -      
         RouteClaimsRequirement:
             userType: SALESMAN      
         DangerousAcceptAnyServerCertificateValidator: true
+#
+#   ServiceName: Microservices.Demo.Policy.API
+#
     -
         DownstreamPathTemplate: /api/Offers
         DownstreamScheme: http
@@ -71,13 +80,14 @@ Routes:
             - Post
         AuthenticationOptions:
             AuthenticationProviderKey: ApiSecurityAuthenticationScheme
-  #          AllowedScopes: 
-  #              -
         RouteClaimsRequirement:
             userType: SALESMAN      
         DangerousAcceptAnyServerCertificateValidator: true
         AddHeadersToRequest:
             AgentLogin: Claims[http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier] > value[0] > |
+#
+#   ServiceName: Microservices.Demo.Policy.API
+#
     -
         DownstreamPathTemplate: /api/Policies
         DownstreamScheme: http
@@ -87,11 +97,12 @@ Routes:
             - Post
         AuthenticationOptions:
             AuthenticationProviderKey: ApiSecurityAuthenticationScheme
-#            AllowedScopes:
-#                -
         RouteClaimsRequirement:
             userType: SALESMAN
         DangerousAcceptAnyServerCertificateValidator: true
+#
+#   ServiceName: Microservices.Demo.Policy.API
+#
     -
         DownstreamPathTemplate: /api/Policies/{number}
         DownstreamScheme: http
@@ -103,11 +114,12 @@ Routes:
             TtlSeconds: 15
         AuthenticationOptions:
             AuthenticationProviderKey: ApiSecurityAuthenticationScheme
-#            AllowedScopes:
-#                -      
         RouteClaimsRequirement:
             userType: SALESMAN      
         DangerousAcceptAnyServerCertificateValidator: true
+#
+#   ServiceName: Microservices.Demo.PolicySearch.API
+#
     -
         DownstreamPathTemplate: /api/PoliciesSearch
         DownstreamScheme: http
@@ -117,11 +129,26 @@ Routes:
             - Get
         AuthenticationOptions:
             AuthenticationProviderKey: ApiSecurityAuthenticationScheme
-#            AllowedScopes:
-#                -      
         RouteClaimsRequirement: 
-            userType: SALESMAN   
-        DangerousAcceptAnyServerCertificateValidator: true    
+            userType: SALESMAN
+        DangerousAcceptAnyServerCertificateValidator: true
+#   RATG CAMBIOS
+#   ServiceName: Microservices.Demo.Report.API
+#
+    -
+        DownstreamPathTemplate: /api/Report/ReportPolicy
+        DownstreamScheme: http
+        UpstreamPathTemplate: /api/Report/ReportPolicy
+        ServiceName: Microservices.Demo.Report.API
+        UpstreamHttpMethod: 
+            - Get
+        FileCacheOptions: 
+            TtlSeconds: 15
+        AuthenticationOptions:
+            AuthenticationProviderKey: ApiSecurityAuthenticationScheme
+        RouteClaimsRequirement:
+            userType: SALESMAN
+        DangerousAcceptAnyServerCertificateValidator: true
 GlobalConfiguration:
     RequestIdKey: OcRequestId
     AdministrationPath: /administration
